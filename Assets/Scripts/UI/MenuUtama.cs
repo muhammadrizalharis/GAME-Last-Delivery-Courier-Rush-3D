@@ -8,8 +8,8 @@ public class MenuUtama : MonoBehaviour
 
     public void Mulai()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneLevel1);
+        SkorGame.Reset();
+        Transisi.Pindah(sceneLevel1);
     }
 
     public void Keluar()

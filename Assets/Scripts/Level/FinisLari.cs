@@ -31,7 +31,6 @@ public class FinisLari : MonoBehaviour
     {
         if (sudah) return;
         sudah = true;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneBerikut);
+        Transisi.Pindah(sceneBerikut);
     }
 }

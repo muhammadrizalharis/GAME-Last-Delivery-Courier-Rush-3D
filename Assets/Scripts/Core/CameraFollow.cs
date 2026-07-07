@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public Vector3 offset = new Vector3(0, 6, -9);
     public float kehalusan = 5f;
+    float getar = 0f;
 
     void Start()
     {
@@ -31,5 +32,17 @@ public class CameraFollow : MonoBehaviour
             Quaternion tujuanRot = Quaternion.LookRotation(arah / mag);
             transform.rotation = Quaternion.Slerp(transform.rotation, tujuanRot, kehalusan * Time.deltaTime);
         }
+
+        if (getar > 0f)
+        {
+            getar -= Time.deltaTime * 2.5f;
+            if (getar < 0f) getar = 0f;
+            transform.position += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f) * getar;
+        }
+    }
+
+    public void Getar(float kekuatan)
+    {
+        if (kekuatan > getar) getar = kekuatan;
     }
 }

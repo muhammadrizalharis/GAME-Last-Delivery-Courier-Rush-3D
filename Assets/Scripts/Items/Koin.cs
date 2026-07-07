@@ -56,6 +56,7 @@ public class Koin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (RunGame.instance != null) RunGame.instance.TambahSkor(nilai);
+            Kilau.Ledak(transform.position, new Color(1f, 0.84f, 0.15f));
             Destroy(gameObject);
         }
     }

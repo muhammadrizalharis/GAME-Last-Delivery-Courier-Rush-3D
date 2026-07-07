@@ -6,8 +6,13 @@ public class NavTombol : MonoBehaviour
 {
     public void GantiScene(string namaScene)
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(namaScene);
+        Transisi.Pindah(namaScene);
+    }
+
+    public void MainLagi()
+    {
+        SkorGame.Reset();
+        Transisi.Pindah("Level1Scene1");
     }
 
     public void Keluar()

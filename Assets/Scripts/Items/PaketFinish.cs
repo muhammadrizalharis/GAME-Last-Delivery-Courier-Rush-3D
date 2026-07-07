@@ -9,7 +9,7 @@ public class PaketFinish : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("PAKET TERAMBIL - lanjut ke jalan!");
-            SceneManager.LoadScene("Level1Scene2");
+            Transisi.Pindah("Level1Scene2");
         }
     }
 }

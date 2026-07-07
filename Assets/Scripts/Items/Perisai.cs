@@ -54,6 +54,7 @@ public class Perisai : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (RunGame.instance != null) RunGame.instance.AktifkanPerisai(durasi);
+            Kilau.Ledak(transform.position, new Color(0.25f, 0.85f, 1f));
             Destroy(gameObject);
         }
     }
