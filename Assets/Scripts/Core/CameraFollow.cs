@@ -25,7 +25,11 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, tujuan, kehalusan * Time.deltaTime);
 
         Vector3 arah = (target.position + Vector3.up * 1.5f) - transform.position;
-        if (arah.sqrMagnitude > 0.0001f)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(arah), kehalusan * Time.deltaTime);
+        float mag = arah.magnitude;
+        if (mag > 0.001f && !float.IsNaN(mag) && !float.IsInfinity(mag))
+        {
+            Quaternion tujuanRot = Quaternion.LookRotation(arah / mag);
+            transform.rotation = Quaternion.Slerp(transform.rotation, tujuanRot, kehalusan * Time.deltaTime);
+        }
     }
 }
