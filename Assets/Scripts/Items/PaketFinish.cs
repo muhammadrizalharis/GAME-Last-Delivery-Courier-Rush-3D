@@ -9,6 +9,7 @@ public class PaketFinish : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("PAKET TERAMBIL - lanjut ke jalan!");
+            if (RunGame.instance != null) RunGame.instance.TambahSkor(50);
             Transisi.Pindah("Level1Scene2");
         }
     }

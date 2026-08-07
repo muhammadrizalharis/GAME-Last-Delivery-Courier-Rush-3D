@@ -30,7 +30,15 @@ public class FinisLari : MonoBehaviour
     void Selesai()
     {
         if (sudah) return;
+        RunGame rg = RunGame.instance;
+        if (rg != null && !rg.BolehSelesai())
+        {
+            sudah = true;
+            rg.GagalKoinKurang();
+            return;
+        }
         sudah = true;
+        if (rg != null) rg.SkorFinish();
         Transisi.Pindah(sceneBerikut);
     }
 }

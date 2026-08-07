@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 550003}
   - component: {fileID: 550004}
   - component: {fileID: 550005}
+  - component: {fileID: 550006}
   m_Layer: 0
   m_Name: BosKereta
   m_TagString: Untagged
@@ -708,6 +709,122 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ayun: 3.3
   kecepatan: 1.8
+--- !u!114 &550006
+MonoBehaviour:
+  m_GameObject: {fileID: 550000}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: f8b2c3d4e5f64780a0b1c2d3e4f50828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogBoss: 'Rel ini jalurku, menyingkir!'
+  dialogKurir: 'Aku harus lewat!'
+  jarakPicu: 30
+--- !u!1 &560000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560001}
+  - component: {fileID: 560002}
+  - component: {fileID: 560003}
+  - component: {fileID: 560004}
+  m_Layer: 0
+  m_Name: Kereta4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &560001
+Transform:
+  m_GameObject: {fileID: 560000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 140}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &560002
+BoxCollider:
+  m_GameObject: {fileID: 560000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2.4, z: 4}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &560003
+MonoBehaviour:
+  m_GameObject: {fileID: 560000}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: e1b2c3d4e5f64780a0b1c2d3e4f50811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warna: {r: 0.24, g: 0.3, b: 0.34, a: 1}
+--- !u!114 &560004
+MonoBehaviour:
+  m_GameObject: {fileID: 560000}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: d9b2c3d4e5f64780a0b1c2d3e4f50809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kecepatan: 8
+  spawnMode: 0
+--- !u!1 &570000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570001}
+  - component: {fileID: 570002}
+  - component: {fileID: 570003}
+  - component: {fileID: 570004}
+  m_Layer: 0
+  m_Name: Kereta5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570001
+Transform:
+  m_GameObject: {fileID: 570000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &570002
+BoxCollider:
+  m_GameObject: {fileID: 570000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2.4, z: 4}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &570003
+MonoBehaviour:
+  m_GameObject: {fileID: 570000}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: e1b2c3d4e5f64780a0b1c2d3e4f50811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warna: {r: 0.34, g: 0.26, b: 0.22, a: 1}
+--- !u!114 &570004
+MonoBehaviour:
+  m_GameObject: {fileID: 570000}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: d9b2c3d4e5f64780a0b1c2d3e4f50809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kecepatan: 7
+  spawnMode: 0
 --- !u!1 &610000
 GameObject:
   m_ObjectHideFlags: 0

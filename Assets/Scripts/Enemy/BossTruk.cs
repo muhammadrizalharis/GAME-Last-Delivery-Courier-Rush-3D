@@ -25,7 +25,7 @@ public class BossTruk : MonoBehaviour
         if (other.CompareTag("Player") && !cooldown)
         {
             cooldown = true;
-            if (RunGame.instance != null) RunGame.instance.Kena();
+            if (RunGame.instance != null) RunGame.instance.Kena(40);
             Invoke(nameof(ResetCd), 1f);
         }
     }

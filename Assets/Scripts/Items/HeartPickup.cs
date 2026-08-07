@@ -59,7 +59,7 @@ public class HeartPickup : MonoBehaviour
     {
         if (Application.isPlaying && other.CompareTag("Player"))
         {
-            if (RunGame.instance != null) RunGame.instance.TambahNyawa();
+            if (RunGame.instance != null) RunGame.instance.PulihHP(30);
             Destroy(gameObject);
         }
     }
