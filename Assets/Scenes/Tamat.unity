@@ -417,9 +417,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'LEVEL 4
+  m_Text: 'KAMU
 
-    TERBUKA'
+    MENANG!'
 --- !u!114 &500004
 MonoBehaviour:
   m_GameObject: {fileID: 500000}
@@ -485,9 +485,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'LEVEL 4
+  m_Text: 'KAMU
 
-    TERBUKA'
+    MENANG!'
 --- !u!1 &520000
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Level 4 terbuka! Lanjutkan atau kembali ke menu.
+  m_Text: Kamu menyelesaikan semua level! Terima kasih sudah bermain.
 --- !u!1 &600000
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,14 +620,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 300002}
         m_TargetAssemblyTypeName: NavTombol, Assembly-CSharp
-        m_MethodName: GantiScene
-        m_Mode: 5
+        m_MethodName: MainLagi
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level4Scene1
+          m_StringArgument: Level3Scene1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &610000
@@ -684,7 +684,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: LANJUT
+  m_Text: MAIN LAGI
 --- !u!1 &700000
 GameObject:
   m_ObjectHideFlags: 0

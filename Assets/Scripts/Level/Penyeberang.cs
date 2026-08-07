@@ -1,13 +1,13 @@
 using UnityEngine;
 
-// Rintangan MENYEBERANG (orang pasar) bergerak KIRI-KANAN memotong jalur.
-// Pemain harus melintas saat lane-nya kosong. Setelah dilewati -> pindah maju lagi (recycle).
+// Orang MENYEBERANG jalan seperti pejalan kaki asli: berjalan LURUS satu arah menyeberang jalan,
+// setelah sampai seberang (atau dilewati pemain) muncul lagi di depan dari salah satu sisi (arah acak).
 public class Penyeberang : MonoBehaviour
 {
-    public float kecepatan = 2.2f;   // laju ayun menyeberang
-    public float batasX = 4.5f;      // sejauh mana menyeberang kiri-kanan
-    public float jarakUlang = 70f;   // reset ke depan pemain sejauh ini
-    float fase;
+    public float kecepatan = 3f;    // laju jalan menyamping (unit/detik)
+    public float batasX = 5.5f;     // sisi kiri/kanan jalan
+    public float jarakUlang = 70f;  // reset ke depan pemain sejauh ini
+    int arah = 1;
     float cooldown = 0f;
     Transform player;
 
@@ -15,32 +15,33 @@ public class Penyeberang : MonoBehaviour
     {
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
-        fase = Random.Range(0f, 6.28f);
+        UlangPosisi(transform.position.z);
+    }
+
+    void UlangPosisi(float z)
+    {
+        arah = (Random.value < 0.5f) ? 1 : -1;
+        Vector3 pos = transform.position;
+        pos.x = arah > 0 ? -(batasX + 3f) : (batasX + 3f);
+        pos.z = z;
+        transform.position = pos;
+        transform.rotation = Quaternion.Euler(0f, arah > 0f ? 90f : -90f, 0f);
     }
 
     void Update()
     {
         if (!Application.isPlaying) return;
 
-        fase += kecepatan * Time.deltaTime;
         Vector3 pos = transform.position;
-        pos.x = Mathf.Sin(fase) * batasX;
+        pos.x += arah * kecepatan * Time.deltaTime;
         transform.position = pos;
-
-        // hadapkan ke arah jalan (menyamping)
-        float arah = Mathf.Cos(fase);
-        if (Mathf.Abs(arah) > 0.01f)
-            transform.rotation = Quaternion.Euler(0f, arah > 0f ? 90f : -90f, 0f);
 
         if (cooldown > 0f) cooldown -= Time.deltaTime;
 
-        // pemain sudah lewat -> pindah maju lagi
-        if (player != null && player.position.z > transform.position.z + 6f)
-        {
-            pos = transform.position;
-            pos.z = player.position.z + jarakUlang;
-            transform.position = pos;
-        }
+        bool sampaiSeberang = (arah > 0 && pos.x > batasX + 3f) || (arah < 0 && pos.x < -(batasX + 3f));
+        bool dilewati = player != null && player.position.z > pos.z + 6f;
+        if (sampaiSeberang || dilewati)
+            UlangPosisi((player != null ? player.position.z : pos.z) + jarakUlang);
     }
 
     void OnTriggerEnter(Collider other)

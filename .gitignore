@@ -45,3 +45,7 @@ crashlytics-build.properties
 # OS
 .DS_Store
 Thumbs.db
+
+# Unity crash-recovery scratch (bukan bagian game)
+/Assets/_Recovery/
+/Assets/_Recovery.meta

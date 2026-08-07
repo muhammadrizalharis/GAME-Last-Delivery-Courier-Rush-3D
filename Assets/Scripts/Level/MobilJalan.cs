@@ -5,6 +5,7 @@ public class MobilJalan : MonoBehaviour
 {
     public float kecepatan = 12f;
     public bool spawnMode = false;   // true = dibuat spawner (hancur saat lewat)
+    public int damage = 20;          // HP yang dikurangi saat menabrak pemain
     Transform player;
     float[] lane = { -3f, 0f, 3f };
     bool cooldown = false;
@@ -40,7 +41,7 @@ public class MobilJalan : MonoBehaviour
         if (other.CompareTag("Player") && !cooldown)
         {
             cooldown = true;
-            if (RunGame.instance != null) RunGame.instance.Kena();
+            if (RunGame.instance != null) RunGame.instance.Kena(damage);
             if (spawnMode) Destroy(gameObject, 0.1f);
             else Ulang();
         }

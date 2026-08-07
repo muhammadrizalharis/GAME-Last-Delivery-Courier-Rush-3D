@@ -417,7 +417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'LEVEL 4
+  m_Text: 'LEVEL 5
 
     TERBUKA'
 --- !u!114 &500004
@@ -485,7 +485,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'LEVEL 4
+  m_Text: 'LEVEL 5
 
     TERBUKA'
 --- !u!1 &520000
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Level 4 terbuka! Lanjutkan atau kembali ke menu.
+  m_Text: Level 5 terbuka! Level terakhir — lanjut atau ke menu.
 --- !u!1 &600000
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level4Scene1
+          m_StringArgument: Level5Scene1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &610000
