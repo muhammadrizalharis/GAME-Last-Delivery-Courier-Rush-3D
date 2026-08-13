@@ -343,7 +343,7 @@ GameObject:
 Transform:
   m_GameObject: {fileID: 401000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0, y: -0.23, z: 0}
   m_LocalScale: {x: 10, y: 0.3, z: 70}
   m_Children: []
   m_Father: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
 Transform:
   m_GameObject: {fileID: 402000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 0.15, z: 0}
+  m_LocalPosition: {x: -6.5, y: -0.33, z: 0}
   m_LocalScale: {x: 3, y: 0.5, z: 70}
   m_Children: []
   m_Father: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
 Transform:
   m_GameObject: {fileID: 403000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0.15, z: 0}
+  m_LocalPosition: {x: 6.5, y: -0.33, z: 0}
   m_LocalScale: {x: 3, y: 0.5, z: 70}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1977,3 +1977,139 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jarakMuncul: 7
+--- !u!1 &1500000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1500001}
+  - component: {fileID: 1500002}
+  m_Layer: 0
+  m_Name: TembokBatasKiri
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1500001
+Transform:
+  m_GameObject: {fileID: 1500000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11, y: 2, z: 0}
+  m_LocalScale: {x: 0.5, y: 5, z: 73}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &1500002
+BoxCollider:
+  m_GameObject: {fileID: 1500000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1510000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510001}
+  - component: {fileID: 1510002}
+  m_Layer: 0
+  m_Name: TembokBatasKanan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510001
+Transform:
+  m_GameObject: {fileID: 1510000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25, y: 2, z: 0}
+  m_LocalScale: {x: 0.5, y: 5, z: 73}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &1510002
+BoxCollider:
+  m_GameObject: {fileID: 1510000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1520000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520001}
+  - component: {fileID: 1520002}
+  m_Layer: 0
+  m_Name: TembokBatasBelakang
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1520001
+Transform:
+  m_GameObject: {fileID: 1520000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: 2, z: -36}
+  m_LocalScale: {x: 37, y: 5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &1520002
+BoxCollider:
+  m_GameObject: {fileID: 1520000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1530000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530001}
+  - component: {fileID: 1530002}
+  m_Layer: 0
+  m_Name: TembokBatasDepan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530001
+Transform:
+  m_GameObject: {fileID: 1530000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: 2, z: 36}
+  m_LocalScale: {x: 37, y: 5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &1530002
+BoxCollider:
+  m_GameObject: {fileID: 1530000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

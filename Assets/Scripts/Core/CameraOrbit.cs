@@ -30,7 +30,8 @@ public class CameraOrbit : MonoBehaviour
     {
         if (target == null) return;
 
-        if (Mouse.current != null)
+        // saat dialog/briefing (game di-pause, timeScale 0) view dikunci -> mouse dipakai klik tombol
+        if (Time.timeScale > 0f && Mouse.current != null)
         {
             Vector2 delta = Mouse.current.delta.ReadValue();
             yaw += delta.x * sensitivitas;

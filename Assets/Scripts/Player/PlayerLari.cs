@@ -12,6 +12,8 @@ public class PlayerLari : MonoBehaviour
     public float percepatan = 0f;     // >0 = makin cepat seiring waktu (dipakai Level 2)
     public float kecepatanMaks = 18f;
     public float dorongan = 0f;        // dorongan samping dari ban berjalan (Level 5)
+    public bool bawaPaket = false;     // saat bawa paket, kecepatan maju turun (keunikan game)
+    public float faktorBawaPaket = 0.6f;
     Rigidbody rb;
     bool mintaLompat = false;
 
@@ -56,7 +58,8 @@ public class PlayerLari : MonoBehaviour
         if (mintaLompat && diTanah && !menunduk) vy = lompat; // tak bisa lompat sambil menunduk
         mintaLompat = false;
 
-        rb.linearVelocity = new Vector3(geser * kecepatanGeser + dorongan, vy, kecepatanMaju);
+        float maju = bawaPaket ? kecepatanMaju * faktorBawaPaket : kecepatanMaju;
+        rb.linearVelocity = new Vector3(geser * kecepatanGeser + dorongan, vy, maju);
 
         // jaga pemain tetap di atas jalan: tak boleh jatuh/menembus, dan tak keluar samping
         p.x = Mathf.Clamp(p.x, -batasX, batasX);

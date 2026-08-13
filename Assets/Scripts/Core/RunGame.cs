@@ -21,6 +21,9 @@ public class RunGame : MonoBehaviour
     int hp = 100;
     int koin = 0;
     int jumlahKena = 0;
+    int nyawaSisa = 3;
+    bool bawaPaket = false;
+    PlayerLari pemainLari;
 
     public static RunGame instance;
     bool selesai = false;
@@ -33,6 +36,8 @@ public class RunGame : MonoBehaviour
     RectTransform barHPisi;
     Text teksHP;
     Text teksKoin;
+    Text teksNyawa;
+    Text teksPaket;
 
     void Awake() { instance = this; }
 
@@ -54,7 +59,11 @@ public class RunGame : MonoBehaviour
             for (int i = 0; i < hati.Length; i++)
                 if (hati[i] != null) hati[i].SetActive(false);
         hp = hpMaks;
+        nyawaSisa = Mathf.Max(1, nyawa);
+        pemainLari = FindFirstObjectByType<PlayerLari>();
         SpawnKoin();
+        SpawnPaket();
+        PasangInteraksiNPC();
         kamGetar = FindFirstObjectByType<CameraFollow>();
         UpdateHUD();
     }
@@ -118,6 +127,12 @@ public class RunGame : MonoBehaviour
         }
         if (teksHP != null) teksHP.text = "HP " + Mathf.Max(0, hp) + "/" + hpMaks;
         if (teksKoin != null) teksKoin.text = "Koin: " + koin + "/" + koinWajib;
+        if (teksNyawa != null) teksNyawa.text = "Nyawa: " + Mathf.Max(0, nyawaSisa);
+        if (teksPaket != null)
+        {
+            teksPaket.text = bawaPaket ? "Paket: DIBAWA" : "Paket: BELUM";
+            teksPaket.color = bawaPaket ? new Color(0.4f, 1f, 0.55f) : new Color(1f, 0.6f, 0.4f);
+        }
     }
 
     // dipanggil rintangan/NPC (default 20). Boss pakai Kena(40).
@@ -130,7 +145,16 @@ public class RunGame : MonoBehaviour
         EfekKena();
         jumlahKena++;
         hp -= damage;
-        if (hp <= 0) { hp = 0; Kalah("GAME OVER"); }
+        if (hp <= 0)
+        {
+            nyawaSisa--;
+            if (nyawaSisa > 0)
+            {
+                hp = hpMaks;           // masih ada nyawa -> HP dipulihkan (respawn)
+                AktifkanPerisai(1.5f); // kebal sebentar agar tak langsung tumbang lagi
+            }
+            else { hp = 0; Kalah("GAME OVER"); }
+        }
         UpdateHUD();
     }
 
@@ -150,11 +174,33 @@ public class RunGame : MonoBehaviour
         TambahSkor(nilaiSkor);
     }
 
+    // paket diambil: status bawa paket aktif + skor + kecepatan pemain turun
+    public void AmbilPaket()
+    {
+        if (selesai || bawaPaket) return;
+        bawaPaket = true;
+        if (pemainLari != null)
+        {
+            pemainLari.bawaPaket = true;
+            RakitKurir rk = pemainLari.GetComponent<RakitKurir>();
+            if (rk != null) rk.SetBawaTas(true);
+        }
+        TambahSkor(50);
+        UpdateHUD();
+    }
+
+    public bool PunyaPaket() { return bawaPaket; }
+
     public bool BolehSelesai() { return koin >= koinWajib; }
 
     public void GagalKoinKurang()
     {
         Kalah("KOIN KURANG " + koin + "/" + koinWajib);
+    }
+
+    public void GagalPaket()
+    {
+        Kalah("PAKET BELUM DIAMBIL!");
     }
 
     // skor saat mencapai finish: finish + sisa waktu + kondisi paket
@@ -183,6 +229,35 @@ public class RunGame : MonoBehaviour
             bc.size = Vector3.one * 1.4f;
             g.AddComponent<Koin>();
         }
+    }
+
+    // buat 1 paket di dekat titik start kalau scene belum punya (wajib diambil sebelum finish)
+    void SpawnPaket()
+    {
+        if (!Application.isPlaying) return;
+        if (FindFirstObjectByType<Paket>() != null) return;
+        GameObject g = new GameObject("PaketAuto");
+        g.transform.position = new Vector3(0f, 1.2f, 12f);
+        BoxCollider bc = g.AddComponent<BoxCollider>();
+        bc.isTrigger = true;
+        bc.size = Vector3.one * 1.6f;
+        g.AddComponent<Paket>();
+    }
+
+    // pasang interaksi ke SEMUA NPC kecil (punya MobilJalan/Penyeberang), kecuali boss
+    void PasangInteraksiNPC()
+    {
+        if (!Application.isPlaying) return;
+        foreach (var m in FindObjectsByType<MobilJalan>(FindObjectsSortMode.None))
+            PasangSatu(m.gameObject);
+        foreach (var n in FindObjectsByType<Penyeberang>(FindObjectsSortMode.None))
+            PasangSatu(n.gameObject);
+    }
+
+    void PasangSatu(GameObject go)
+    {
+        if (go.GetComponent<BossTruk>() != null || go.GetComponent<DialogBoss>() != null) return;
+        if (go.GetComponent<InteraksiNPC>() == null) go.AddComponent<InteraksiNPC>();
     }
 
     // dipanggil item jam untuk tambah waktu
@@ -262,6 +337,12 @@ public class RunGame : MonoBehaviour
         RectTransform kr = BuatKotak(cv.transform, "KoinBg", new Color(0f, 0f, 0f, 0f),
             new Vector2(0, 1), new Vector2(30, -72), new Vector2(340, 34));
         teksKoin = BuatLabel(kr, "Koin: 0/6", 24, TextAnchor.MiddleLeft);
+        RectTransform nr = BuatKotak(cv.transform, "NyawaBg", new Color(0f, 0f, 0f, 0f),
+            new Vector2(0, 1), new Vector2(30, -108), new Vector2(340, 32));
+        teksNyawa = BuatLabel(nr, "Nyawa: 3", 22, TextAnchor.MiddleLeft);
+        RectTransform pr = BuatKotak(cv.transform, "PaketBg", new Color(0f, 0f, 0f, 0f),
+            new Vector2(0, 1), new Vector2(30, -142), new Vector2(340, 32));
+        teksPaket = BuatLabel(pr, "Paket: BELUM", 22, TextAnchor.MiddleLeft);
     }
 
     RectTransform BuatKotak(Transform parent, string nama, Color warna, Vector2 anchor, Vector2 pos, Vector2 size)

@@ -5,7 +5,8 @@ using UnityEngine;
 [ExecuteAlways]
 public class RakitKurir : MonoBehaviour
 {
-    Transform vis, hipKi, hipKa, bahuKi, bahuKa;
+    public bool bawaTas = false;   // tas paket hanya tampil setelah paket diambil
+    Transform vis, hipKi, hipKa, bahuKi, bahuKa, tasObj;
     Rigidbody rb;
     Vector3 posTerakhir;
     float gerak;
@@ -61,8 +62,10 @@ public class RakitKurir : MonoBehaviour
         Bag(vis, PrimitiveType.Sphere, "TopiKubah", new Vector3(0f, 1.0f, 0f), new Vector3(0.58f, 0.42f, 0.58f), baju);
         Bag(vis, PrimitiveType.Cube, "TopiLidah", new Vector3(0f, 0.95f, 0.34f), new Vector3(0.5f, 0.06f, 0.32f), baju);
 
-        // tas paket di punggung (-z, menghadap kamera)
+        // tas paket di punggung (-z, menghadap kamera) - tampil hanya jika sudah bawa paket
         Bag(vis, PrimitiveType.Cube, "TasPaket", new Vector3(0f, 0.2f, -0.33f), new Vector3(0.5f, 0.62f, 0.32f), tas);
+        tasObj = vis.Find("TasPaket");
+        if (tasObj != null) tasObj.gameObject.SetActive(bawaTas);
 
         // kaki (berayun dari pinggul)
         hipKi = Pivot("HipKiri", new Vector3(-0.18f, -0.1f, 0f));
@@ -71,6 +74,14 @@ public class RakitKurir : MonoBehaviour
         hipKa = Pivot("HipKanan", new Vector3(0.18f, -0.1f, 0f));
         Bag(hipKa, PrimitiveType.Cube, "KakiKanan", new Vector3(0f, -0.45f, 0f), new Vector3(0.28f, 0.9f, 0.32f), celana);
         Bag(hipKa, PrimitiveType.Cube, "SepatuKanan", new Vector3(0f, -0.87f, 0.06f), new Vector3(0.3f, 0.18f, 0.44f), sepatu);
+    }
+
+    // dipanggil saat paket diambil -> tampilkan/sembunyikan tas paket
+    public void SetBawaTas(bool b)
+    {
+        bawaTas = b;
+        if (tasObj == null && vis != null) tasObj = vis.Find("TasPaket");
+        if (tasObj != null) tasObj.gameObject.SetActive(b);
     }
 
     Transform Pivot(string n, Vector3 lp)

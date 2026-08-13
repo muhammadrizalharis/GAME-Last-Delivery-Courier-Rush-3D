@@ -716,6 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b2c3d4e5f64780a0b1c2d3e4f50828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  namaBoss: Rail Chaser
   dialogBoss: 'Rel ini jalurku, menyingkir!'
   dialogKurir: 'Aku harus lewat!'
   jarakPicu: 30

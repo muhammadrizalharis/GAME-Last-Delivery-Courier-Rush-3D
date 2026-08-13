@@ -31,6 +31,12 @@ public class FinisLari : MonoBehaviour
     {
         if (sudah) return;
         RunGame rg = RunGame.instance;
+        if (rg != null && !rg.PunyaPaket())
+        {
+            sudah = true;
+            rg.GagalPaket();
+            return;
+        }
         if (rg != null && !rg.BolehSelesai())
         {
             sudah = true;

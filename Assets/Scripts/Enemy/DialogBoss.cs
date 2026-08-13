@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 // (boss lalu kurir) dengan tombol LANJUT. Setelah selesai, game lanjut lagi. Play-only.
 public class DialogBoss : MonoBehaviour
 {
+    public string namaBoss = "BOSS";
     public string dialogBoss = "Kau tak akan lewat!";
     public string dialogKurir = "Paket ini harus sampai!";
     public float jarakPicu = 30f;
@@ -47,7 +48,7 @@ public class DialogBoss : MonoBehaviour
 
     void Mulai()
     {
-        nama = new string[] { "BOSS", "KURIR" };
+        nama = new string[] { namaBoss, "KURIR" };
         isi = new string[] { dialogBoss, dialogKurir };
         warna = new Color[] { new Color(1f, 0.5f, 0.4f), new Color(0.5f, 0.9f, 1f) };
         idx = 0;

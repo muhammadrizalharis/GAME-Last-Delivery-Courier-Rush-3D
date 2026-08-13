@@ -728,6 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b2c3d4e5f64780a0b1c2d3e4f50828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  namaBoss: Market Racer
   dialogBoss: 'Mau lewat? Beli dulu daganganku!'
   dialogKurir: 'Lain kali ya!'
   jarakPicu: 30
