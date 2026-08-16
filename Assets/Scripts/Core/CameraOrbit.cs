@@ -24,6 +24,8 @@ public class CameraOrbit : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) target = p.transform;
         }
+        Camera cam = GetComponent<Camera>();
+        if (cam != null) cam.nearClipPlane = 0.05f;   // biar tak menembus dinding saat kamera dekat
     }
 
     void LateUpdate()
@@ -46,7 +48,12 @@ public class CameraOrbit : MonoBehaviour
 
         Quaternion rot = Quaternion.Euler(pitch, yaw, 0f);
         Vector3 fokus = target.position + Vector3.up * tinggi;
-        transform.position = fokus - (rot * Vector3.forward) * jarak;
+        Vector3 arah = rot * Vector3.forward;
+        float jarakPakai = jarak;
+        // anti-tembus: SphereCast tebal dari fokus ke arah kamera; berhenti tepat di depan dinding/atap
+        if (Physics.SphereCast(fokus, 0.45f, -arah, out RaycastHit hit, jarak, ~0, QueryTriggerInteraction.Ignore))
+            jarakPakai = Mathf.Clamp(hit.distance, 0.6f, jarak);
+        transform.position = fokus - arah * jarakPakai;
         transform.rotation = rot;
     }
 

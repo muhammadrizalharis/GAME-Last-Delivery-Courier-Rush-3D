@@ -39,26 +39,40 @@ public class RakitKurir : MonoBehaviour
         Material sepatu = Buat(s, new Color(0.12f, 0.12f, 0.14f));
         Material kulit = Buat(s, new Color(0.95f, 0.78f, 0.6f));
         Material tas = Buat(s, new Color(0.78f, 0.6f, 0.38f));
+        Material putih = Buat(s, Color.white);
+        Material hitam = Buat(s, new Color(0.08f, 0.07f, 0.07f));
+        Material mulut = Buat(s, new Color(0.55f, 0.28f, 0.26f));
 
         GameObject v = new GameObject("Visual");
         v.hideFlags = HideFlags.DontSave;
         v.transform.SetParent(transform, false);
         vis = v.transform;
 
-        // badan
-        Bag(vis, PrimitiveType.Cube, "Badan", new Vector3(0f, 0.15f, 0f), new Vector3(0.62f, 0.8f, 0.4f), baju);
+        // badan & pinggul (kapsul membulat, bukan kotak)
+        Bag(vis, PrimitiveType.Capsule, "Badan", new Vector3(0f, 0.15f, 0f), new Vector3(0.6f, 0.44f, 0.4f), baju);
+        Bag(vis, PrimitiveType.Capsule, "Pinggul", new Vector3(0f, -0.15f, 0f), new Vector3(0.5f, 0.28f, 0.36f), celana);
 
-        // lengan (berayun dari bahu)
+        // lengan (berayun dari bahu) - kapsul + telapak tangan bola
         bahuKi = Pivot("BahuKiri", new Vector3(-0.42f, 0.5f, 0f));
-        Bag(bahuKi, PrimitiveType.Cube, "LenganKiri", new Vector3(0f, -0.3f, 0f), new Vector3(0.18f, 0.7f, 0.24f), baju);
+        Bag(bahuKi, PrimitiveType.Capsule, "LenganKiri", new Vector3(0f, -0.3f, 0f), new Vector3(0.18f, 0.38f, 0.2f), baju);
+        Bag(bahuKi, PrimitiveType.Sphere, "TanganKiri", new Vector3(0f, -0.62f, 0f), new Vector3(0.17f, 0.17f, 0.17f), kulit);
         bahuKa = Pivot("BahuKanan", new Vector3(0.42f, 0.5f, 0f));
-        Bag(bahuKa, PrimitiveType.Cube, "LenganKanan", new Vector3(0f, -0.3f, 0f), new Vector3(0.18f, 0.7f, 0.24f), baju);
+        Bag(bahuKa, PrimitiveType.Capsule, "LenganKanan", new Vector3(0f, -0.3f, 0f), new Vector3(0.18f, 0.38f, 0.2f), baju);
+        Bag(bahuKa, PrimitiveType.Sphere, "TanganKanan", new Vector3(0f, -0.62f, 0f), new Vector3(0.17f, 0.17f, 0.17f), kulit);
 
         // leher + kepala
-        Bag(vis, PrimitiveType.Cube, "Leher", new Vector3(0f, 0.58f, 0f), new Vector3(0.2f, 0.16f, 0.2f), kulit);
+        Bag(vis, PrimitiveType.Cylinder, "Leher", new Vector3(0f, 0.56f, 0f), new Vector3(0.16f, 0.1f, 0.16f), kulit);
         Bag(vis, PrimitiveType.Sphere, "Kepala", new Vector3(0f, 0.8f, 0f), new Vector3(0.5f, 0.55f, 0.5f), kulit);
 
-        // TOPI: kubah membulat (bola pipih) + lidah topi di depan
+        // wajah (mata + hidung + mulut) menghadap +z
+        Bag(vis, PrimitiveType.Sphere, "MataKiP", new Vector3(-0.11f, 0.85f, 0.19f), new Vector3(0.13f, 0.16f, 0.09f), putih);
+        Bag(vis, PrimitiveType.Sphere, "MataKaP", new Vector3(0.11f, 0.85f, 0.19f), new Vector3(0.13f, 0.16f, 0.09f), putih);
+        Bag(vis, PrimitiveType.Sphere, "MataKi", new Vector3(-0.11f, 0.85f, 0.24f), new Vector3(0.07f, 0.08f, 0.05f), hitam);
+        Bag(vis, PrimitiveType.Sphere, "MataKa", new Vector3(0.11f, 0.85f, 0.24f), new Vector3(0.07f, 0.08f, 0.05f), hitam);
+        Bag(vis, PrimitiveType.Sphere, "Hidung", new Vector3(0f, 0.78f, 0.25f), new Vector3(0.09f, 0.1f, 0.12f), kulit);
+        Bag(vis, PrimitiveType.Cube, "Mulut", new Vector3(0f, 0.7f, 0.23f), new Vector3(0.16f, 0.04f, 0.06f), mulut);
+
+        // TOPI kurir: kubah membulat (bola pipih) + lidah topi di depan
         Bag(vis, PrimitiveType.Sphere, "TopiKubah", new Vector3(0f, 1.0f, 0f), new Vector3(0.58f, 0.42f, 0.58f), baju);
         Bag(vis, PrimitiveType.Cube, "TopiLidah", new Vector3(0f, 0.95f, 0.34f), new Vector3(0.5f, 0.06f, 0.32f), baju);
 
@@ -67,12 +81,12 @@ public class RakitKurir : MonoBehaviour
         tasObj = vis.Find("TasPaket");
         if (tasObj != null) tasObj.gameObject.SetActive(bawaTas);
 
-        // kaki (berayun dari pinggul)
+        // kaki (berayun dari pinggul) - kapsul + sepatu
         hipKi = Pivot("HipKiri", new Vector3(-0.18f, -0.1f, 0f));
-        Bag(hipKi, PrimitiveType.Cube, "KakiKiri", new Vector3(0f, -0.45f, 0f), new Vector3(0.28f, 0.9f, 0.32f), celana);
+        Bag(hipKi, PrimitiveType.Capsule, "KakiKiri", new Vector3(0f, -0.45f, 0f), new Vector3(0.28f, 0.46f, 0.3f), celana);
         Bag(hipKi, PrimitiveType.Cube, "SepatuKiri", new Vector3(0f, -0.87f, 0.06f), new Vector3(0.3f, 0.18f, 0.44f), sepatu);
         hipKa = Pivot("HipKanan", new Vector3(0.18f, -0.1f, 0f));
-        Bag(hipKa, PrimitiveType.Cube, "KakiKanan", new Vector3(0f, -0.45f, 0f), new Vector3(0.28f, 0.9f, 0.32f), celana);
+        Bag(hipKa, PrimitiveType.Capsule, "KakiKanan", new Vector3(0f, -0.45f, 0f), new Vector3(0.28f, 0.46f, 0.3f), celana);
         Bag(hipKa, PrimitiveType.Cube, "SepatuKanan", new Vector3(0f, -0.87f, 0.06f), new Vector3(0.3f, 0.18f, 0.44f), sepatu);
     }
 

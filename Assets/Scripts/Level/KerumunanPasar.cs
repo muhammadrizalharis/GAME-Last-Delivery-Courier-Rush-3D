@@ -27,15 +27,15 @@ public class KerumunanPasar : MonoBehaviour
             Spawn(-6.2f, z, 2, 90f);
         }
 
-        // pengunjung: sebagian melihat dagangan, sebagian berjalan warung ke warung
+        // pengunjung: KEBANYAKAN berlalu-lalang warung ke warung, sebagian berhenti melihat dagangan
         for (int i = 0; i < jumlahPengunjung; i++)
         {
             float sisi = (i % 2 == 0) ? 1f : -1f;
-            float z = Mathf.Lerp(20f, akhirZ - 10f, (i + 0.5f) / jumlahPengunjung) + Random.Range(-4f, 4f);
-            if (Random.value < 0.4f)
-                Spawn(sisi * 5.1f, z, 1, 0f);                     // jalan warung ke warung
+            float z = Mathf.Lerp(18f, akhirZ - 10f, (i + 0.5f) / jumlahPengunjung) + Random.Range(-5f, 5f);
+            if (Random.value < 0.62f)
+                Spawn(sisi * Random.Range(4.9f, 5.7f), z, 1, 0f, Random.Range(9f, 22f));   // berlalu-lalang (jarak beragam)
             else
-                Spawn(sisi * 5.0f, z, 0, sisi > 0f ? 90f : -90f); // lihat dagangan
+                Spawn(sisi * 5.1f, z, 0, sisi > 0f ? 90f : -90f);                          // berhenti lihat dagangan
         }
 
         // pedagang mendorong gerobak keliling pasar
@@ -58,7 +58,7 @@ public class KerumunanPasar : MonoBehaviour
         }
     }
 
-    void Spawn(float x, float z, int mode, float hadap)
+    void Spawn(float x, float z, int mode, float hadap, float jarak = 12f)
     {
         GameObject g = new GameObject("Warga");
         g.SetActive(false);
@@ -68,6 +68,7 @@ public class KerumunanPasar : MonoBehaviour
         WargaPasar w = g.AddComponent<WargaPasar>();
         w.mode = mode;
         w.hadap = hadap;
+        w.jarak = jarak;
         g.SetActive(true);
     }
 }

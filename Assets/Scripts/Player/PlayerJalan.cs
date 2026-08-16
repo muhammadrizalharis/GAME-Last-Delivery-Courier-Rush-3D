@@ -6,13 +6,21 @@ public class PlayerJalan : MonoBehaviour
 {
     public float kecepatan = 7f;
     public float putaran = 12f;
+    public float lompat = 6f;
     Rigidbody rb;
     Transform kamera;
+    bool mintaLompat;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         if (Camera.main != null) kamera = Camera.main.transform;
+    }
+
+    void Update()
+    {
+        var k = Keyboard.current;
+        if (k != null && k.spaceKey.wasPressedThisFrame) mintaLompat = true;
     }
 
     void FixedUpdate()
@@ -37,12 +45,20 @@ public class PlayerJalan : MonoBehaviour
         Vector3 arah = maju * z + kanan * x;
         if (arah.sqrMagnitude > 1f) arah.Normalize();
 
-        rb.linearVelocity = new Vector3(arah.x * kecepatan, rb.linearVelocity.y, arah.z * kecepatan);
+        float vy = rb.linearVelocity.y;
+        bool diTanah = Physics.Raycast(transform.position, Vector3.down, 1.2f, ~0, QueryTriggerInteraction.Ignore);
+        if (mintaLompat && diTanah) vy = lompat;   // Space -> lompat bila menginjak tanah/tangga
+        mintaLompat = false;
+        rb.linearVelocity = new Vector3(arah.x * kecepatan, vy, arah.z * kecepatan);
 
         if (arah.sqrMagnitude > 0.01f)
         {
-            Quaternion tujuan = Quaternion.LookRotation(new Vector3(arah.x, 0f, arah.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, tujuan, putaran * Time.fixedDeltaTime);
+            Vector3 hadap = new Vector3(arah.x, 0f, arah.z);
+            if (hadap.sqrMagnitude > 0.0001f)
+            {
+                Quaternion tujuan = Quaternion.LookRotation(hadap.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, tujuan, putaran * Time.fixedDeltaTime);
+            }
         }
     }
 }
